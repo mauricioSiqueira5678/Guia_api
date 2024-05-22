@@ -10,4 +10,6 @@ public interface RepositorioAprovadoGuia  extends CrudRepository<ModeloGuiaAprov
     List<ModeloGuiaAprovado> findByCategoria(String categoria);
 
     List<ModeloGuiaAprovado> findByNomeContainingIgnoreCase(String nome);
+
+    void deleteByNome(String nome);
 }

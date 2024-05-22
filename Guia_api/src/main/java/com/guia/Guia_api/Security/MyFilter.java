@@ -1,19 +1,17 @@
 package com.guia.Guia_api.Security;
-import java.io.IOException;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.io.IOException;
 
 public class MyFilter extends OncePerRequestFilter {
 
@@ -31,11 +29,11 @@ public class MyFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(auth);
             } else {
                 logger.warn("Failed to decode token for request: {}", request.getRequestURI());
-                ErroDTO erro = new ErroDTO(401, "Usuário não autorizado");
+                ErroDTO erro = new ErroDTO(403, "Usuário não autorizado");
                 response.setStatus(erro.getStatus());
                 response.setContentType("application/json");
                 ObjectMapper mapper = new ObjectMapper();
-                response.getWriter().println(mapper.writeValueAsString(erro));
+                response.getWriter().write(mapper.writeValueAsString(erro));
                 response.getWriter().flush();
                 return;
             }
@@ -44,4 +42,6 @@ public class MyFilter extends OncePerRequestFilter {
         logger.info("Request processed successfully: {}", request.getRequestURI());
     }
 }
+
+
 

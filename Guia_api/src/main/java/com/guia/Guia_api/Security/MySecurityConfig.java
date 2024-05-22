@@ -33,7 +33,7 @@ public class MySecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/listarTodos").permitAll()
                 .requestMatchers(HttpMethod.POST, "/aprovarCadastroPorNome").permitAll()
                 .requestMatchers(HttpMethod.GET, "/listarTodosAprovados").permitAll()
-                //.requestMatchers(HttpMethod.GET, "/listarAprovadosPorCategoria").permitAll()
+                .requestMatchers(HttpMethod.GET, "/listarAprovadosPorCategoria").permitAll()
                 .requestMatchers(HttpMethod.GET, "/pesquisarPorNome").permitAll()
                 .requestMatchers(HttpMethod.POST, "/cadastrar").permitAll()
                

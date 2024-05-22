@@ -5,12 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.guia.Guia_api.Modelo.ModeloGuiaAprovado;
+import com.guia.Guia_api.Modelo.ModeloMensagem;
 import com.guia.Guia_api.servico.ServicoAprovado;
+
+import jakarta.transaction.Transactional;
 
 
 @RestController
@@ -36,5 +41,11 @@ public class ControleAprovado {
     public ResponseEntity<List<ModeloGuiaAprovado>> pesquisarPorNome(@RequestParam String nome) {
         List<ModeloGuiaAprovado> resultados = servico.listarPorNome(nome);
         return ResponseEntity.ok(resultados);
+    }
+
+    @DeleteMapping("/deletarPorNome/{nome}")
+    @Transactional // Adicione esta anotação
+    public ResponseEntity<ModeloMensagem> deletarPorNome(@PathVariable String nome) {
+        return servico.deletarPorNome(nome);
     }
 }
