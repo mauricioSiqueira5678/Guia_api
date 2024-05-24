@@ -48,4 +48,6 @@ public class ControleAprovado {
     public ResponseEntity<ModeloMensagem> deletarPorNome(@PathVariable String nome) {
         return servico.deletarPorNome(nome);
     }
+
+    
 }
